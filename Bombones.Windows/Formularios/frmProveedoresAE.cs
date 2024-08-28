@@ -11,65 +11,74 @@ using System.Windows.Forms;
 
 namespace Bombones.Windows.Formularios
 {
-        public partial class frmProveedoresAE : Form
+    public partial class frmProveedoresAE : Form
+    {
+        private Proveedor? proveedor;
+        public frmProveedoresAE()
         {
-            private Proveedor? proveedor;
-            public frmProveedoresAE()
+            InitializeComponent();
+        }
+
+        public Proveedor? GetProveedor()
+        {
+            return proveedor;
+        }
+
+        public void SetProveedor(Proveedor? proveedor)
+        {
+            this.proveedor = proveedor;
+        }
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            if (proveedor != null)
             {
-                InitializeComponent();
-            }
-
-            public Proveedor? GetProveedor()
-            {
-                return proveedor;
-            }
-
-            public void SetProveedor(Proveedor? proveedor)
-            {
-                this.proveedor = proveedor;
-            }
-            protected override void OnLoad(EventArgs e)
-            {
-                base.OnLoad(e);
-                if (proveedor != null)
-                {
-                    txtProveedor.Text = proveedor.NombreProveedor;
-                }
-            }
-
-
-            private void btnCancelar_Click(object sender, EventArgs e)
-            {
-                DialogResult = DialogResult.Cancel;
-            }
-
-            private void btnOk_Click(object sender, EventArgs e)
-            {
-                if (ValidarDatos())
-                {
-                    if (proveedor == null)
-                    {
-                        proveedor = new Proveedor();
-                    }
-                    proveedor.NombreProveedor = txtProveedor.Text;
-
-                    DialogResult = DialogResult.OK;
-                }
-            }
-
-            private bool ValidarDatos()
-            {
-                bool valido = true;
-                errorProvider1.Clear();
-
-
-                if (string.IsNullOrEmpty(txtProveedor.Text))
-                {
-                    valido = false;
-                    errorProvider1.SetError(txtProveedor, "El proveedor es requerido");
-
-                }
-                return valido;
+                txtProveedor.Text = proveedor.NombreProveedor;
+                txtTelefono.Text = proveedor.Telefono;
+                txtMail.Text = proveedor.Email;
             }
         }
+
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            if (ValidarDatos())
+            {
+                if (proveedor == null)
+                {
+                    proveedor = new Proveedor();
+                }
+                proveedor.NombreProveedor = txtProveedor.Text;
+                proveedor.Telefono = txtTelefono.Text;
+                proveedor.Email = txtMail.Text;
+
+                DialogResult = DialogResult.OK;
+            }
+        }
+
+        private bool ValidarDatos()
+        {
+            bool valido = true;
+            errorProvider1.Clear();
+
+
+            if (string.IsNullOrEmpty(txtProveedor.Text))
+            {
+                valido = false;
+                errorProvider1.SetError(txtProveedor, "El proveedor es requerido");
+
+            }
+            return valido;
+        }
+
+        private void frmProveedoresAE_Load(object sender, EventArgs e)
+        {
+
+        }
     }
+}

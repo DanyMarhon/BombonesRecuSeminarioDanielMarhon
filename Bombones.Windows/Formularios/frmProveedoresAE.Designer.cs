@@ -139,6 +139,7 @@
             Name = "frmProveedoresAE";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmProveedoresAE";
+            Load += frmProveedoresAE_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();

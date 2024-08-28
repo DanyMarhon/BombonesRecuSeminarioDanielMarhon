@@ -47,8 +47,7 @@ namespace Bombones.Datos.Repositorios
         public void Editar(Proveedor proveedor, SqlConnection conn, SqlTransaction? tran = null)
         {
             string updateQuery = @"UPDATE Proveedores 
-                    SET Descripcion=@Descripcion, 
-                        NombreProveedor=@NombreProveedor, 
+                    SET NombreProveedor=@NombreProveedor, 
                         Telefono= @Telefono, 
                         Email= @Email
                     WHERE ProveedorId=@ProveedorId";
@@ -78,7 +77,6 @@ namespace Bombones.Datos.Repositorios
                 }
                 finalQuery = string.Concat(selectQuery, conditional);
                 return conn.QuerySingle<int>(finalQuery, proveedor) > 0;
-
 
             }
             catch (Exception)
